@@ -52,21 +52,21 @@ function showModal (message){
 
 window.onload = () => {
 	document.getElementById('action').addEventListener('click', event => {
-		let playlistId, videoIds = [], setVideoIds = [];
+		let playlistId, videos = [];
 		document.querySelectorAll('.checkbox').forEach(checkbox => {
 			if (checkbox.checked) {
-				videoIds.push(checkbox.getAttribute('videoId'));
-				setVideoIds.push(checkbox.getAttribute('setVideoId'));
+				videos.push({setVideoId: checkbox.getAttribute('setVideoId'), videoId: checkbox.getAttribute('videoId')});
+				// setVideoIds.push(checkbox.getAttribute('setVideoId'));
 				playlistId = checkbox.getAttribute('playlistId');
 			}
 		});
-		showModal(`Please confirm ${videoIds.length} to be deleted`);
+		showModal(`Please confirm ${videos.length} to be deleted`);
 		fetch('/deletesongs', {
 			'method':'POST',
 			'body': JSON.stringify({
 				'playlistId': playlistId, 
-				'videoIds': videoIds,
-				'setVideoIds': setVideoIds
+				'videos': videos,
+				// 'setVideoIds': setVideoIds
 			})
 		})
 		.then(response => response.json())
