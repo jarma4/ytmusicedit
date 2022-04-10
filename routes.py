@@ -17,6 +17,7 @@ def songs():
 @post('/deletesongs')
 def songs():
 	ytmusic.delete_songs(load(request.body)['playlistId'], load(request.body)['videos'])
+	return {'result': 'success'}
 
 @get('/static/<file>')
 def static(file):

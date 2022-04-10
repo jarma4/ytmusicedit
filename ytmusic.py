@@ -6,7 +6,8 @@ def get_playlistIds():
 	new = {}
 	all_lists = music.get_library_playlists()
 	for list in all_lists:
-		new[list['title']] = list['playlistId']
+		new[list['title']] = {'id': list['playlistId'], 'thumb': list['thumbnails']}
+	print(all_lists[0])
 	return new
 
 def get_songs(playlistid):
