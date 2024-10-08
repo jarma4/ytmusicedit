@@ -1,6 +1,6 @@
 from ytmusicapi import YTMusic
 
-music = YTMusic('headers_auth.json')
+music = YTMusic('oauth.json')
 
 def get_playlistIds():
 	new = {}
@@ -11,7 +11,7 @@ def get_playlistIds():
 	return new
 
 def get_songs(playlistid):
-	return music.get_playlist(playlistid, 10)
+	return music.get_playlist(playlistid, 200)
 
 def delete_songs(playlistid, songs):
 	music.remove_playlist_items(playlistid, songs)

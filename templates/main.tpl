@@ -1,16 +1,17 @@
 % include('templates/header.tpl')
 		<div id="container">
 			<div id="sidebar">
+				<div class="heading">New Albums</div>
 				<div class="heading">Playlists</div>
-				<div id="playlistArea"></div>
+				<div id="sidebarContent"></div>
 			</div>
 			<div id="content">
 				<div id="header">
 					<span class="heading">Songs</span>
 					<span id="title" class="heading center"></span>
-					<button id="action" class="btn">Remove checked items</button>
+					<button id="action" class="btn">Delete Songs</button>
 				</div>
-				<div id="songsArea"></div>
+				<div id="mainContent"></div>
 			</div>
 			<div id="modal">
 				<p id="modalMessage"></p>

@@ -5,7 +5,7 @@ function getPlayLists() {
 	.then(response => response.json())
 	.then(response => {
 		let newDiv;
-		const playlistArea = document.getElementById('playlistArea');
+		const sidebarContent = document.getElementById('sidebarContent');
 		Object.keys(response).forEach(key => {
 			newDiv = document.createElement('div');
 			newDiv.className = 'playlistBox';
@@ -16,12 +16,13 @@ function getPlayLists() {
 				document.getElementById('title').textContent = key;
 				getSongs(response[key].id);
 			});
-			playlistArea.appendChild(newDiv);
+			sidebarContent.appendChild(newDiv);
 		});
 	});
 }
 
 function getSongs(playlistId){
+	clearArea('mainContent');
 	fetch('/songs', {
       'method':'POST',
 		'body': JSON.stringify({'playlistId': playlistId})
@@ -29,14 +30,14 @@ function getSongs(playlistId){
 	.then(response => response.json())
 	.then(response => {
 		let newDiv;
-		clearArea('songsArea');
-		const songsArea = document.getElementById('songsArea');
+		document.getElementById('title').textContent += ' ('+response.trackCount+')';
+		const mainContent = document.getElementById('mainContent');
 		let outp = '<table>';
 		response.tracks.forEach((track, index) => {
 			outp += '<tr><td><img src="'+track.thumbnails[0].url+'" class="songThumbnail"></td><td>'+track.title+'</td><td class="songTitle">'+track.artists[0].name+'</td><td>'+((track.album)?track.album.name:'')+'</td><td>'+((track.duration)?track.duration:'')+'</td><td><input type="checkbox" playlistId="'+playlistId+'" setVideoId="'+track.setVideoId+'" videoId="'+track.videoId+'" class="checkbox"></td></tr>';
 		});
 		outp += '</table>';
-		songsArea.innerHTML = outp;
+		mainContent.innerHTML = outp;
 	});
 }
 
